@@ -1,0 +1,201 @@
+table fact_actividades
+	lineageTag: e6353c75-fafb-5ff7-9157-ea29f7cee9cd
+
+	column id_actividad
+		dataType: string
+		lineageTag: fb0efcc1-2f87-5d7c-9e3b-6c3a8f30aa11
+		summarizeBy: none
+		sourceColumn: id_actividad
+
+	column id_proyecto
+		dataType: string
+		isHidden
+		lineageTag: 86a6b185-e788-5edb-9b0d-0172e4555da4
+		summarizeBy: none
+		sourceColumn: id_proyecto
+
+	column id_responsable
+		dataType: string
+		isHidden
+		lineageTag: cd5f8b22-3cb9-54aa-aab9-ad832471a279
+		summarizeBy: none
+		sourceColumn: id_responsable
+
+	column nombre
+		dataType: string
+		lineageTag: 7d21a982-d63e-597f-9b91-5a971b2007de
+		summarizeBy: none
+		sourceColumn: nombre
+
+	column estado
+		dataType: string
+		lineageTag: 28d08347-72c9-5a86-804f-f4cc75e981d1
+		summarizeBy: none
+		sourceColumn: estado
+
+	column prioridad
+		dataType: string
+		lineageTag: c0d187b9-7e23-5e21-ab64-a7d602e32c41
+		summarizeBy: none
+		sourceColumn: prioridad
+
+	column fecha_inicio
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 016ef072-81df-5ab1-b77d-d8c6b427cfdf
+		summarizeBy: none
+		sourceColumn: fecha_inicio
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fecha_fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b8fc06df-95ed-5b92-9a38-7d882eac03c6
+		summarizeBy: none
+		sourceColumn: fecha_fin
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column nueva_fecha_fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a2720998-64fe-5fd6-9b4d-afef95e731a8
+		summarizeBy: none
+		sourceColumn: nueva_fecha_fin
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column av_real
+		dataType: int64
+		lineageTag: 562282be-9294-58e8-93ee-6961b95a3179
+		summarizeBy: none
+		sourceColumn: av_real
+
+	column fecha_actualizacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 54797bea-d2a8-517a-8333-d0df3442633e
+		summarizeBy: none
+		sourceColumn: fecha_actualizacion
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column motivo_bloqueo
+		dataType: string
+		lineageTag: 3b92a4f2-e78a-5b13-9d6b-7943d94e06d2
+		summarizeBy: none
+		sourceColumn: motivo_bloqueo
+
+	column id_predecesora
+		dataType: string
+		isHidden
+		lineageTag: 56756eb9-3f86-5c01-afd1-e2578495ba87
+		summarizeBy: none
+		sourceColumn: id_predecesora
+
+	column 'Fin Efectivo' =
+			IF ( ISBLANK ( fact_actividades[nueva_fecha_fin] ),
+			     fact_actividades[fecha_fin],
+			     MAX ( fact_actividades[fecha_fin], fact_actividades[nueva_fecha_fin] ) )
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: e8bea218-bd30-552a-82a0-315312e02fd5
+		summarizeBy: none
+
+	column 'Avance Planificado' =
+			VAR c = [Fecha Corte]
+			VAR i = fact_actividades[fecha_inicio]
+			VAR f = fact_actividades[fecha_fin]
+			RETURN
+			    ROUND ( IF ( c <= i, 0, IF ( c >= f, 100, 100 * DIVIDE ( c - i, f - i ) ) ), 0 )
+		dataType: int64
+		formatString: 0
+		lineageTag: 10f14b9f-5ce4-5d5c-a6d3-ac206c272970
+		summarizeBy: none
+
+	column Desvío = MAX ( 0, fact_actividades[Avance Planificado] - fact_actividades[av_real] )
+		dataType: int64
+		formatString: 0
+		lineageTag: 2c2fc4b4-795a-5bb2-a9ce-4dfd18a1bc7b
+		summarizeBy: none
+
+	column Semáforo =
+			SWITCH ( TRUE (),
+			    fact_actividades[Desvío] <= 5, "Verde",
+			    fact_actividades[Desvío] <= 9, "Amarillo",
+			    "Rojo" )
+		dataType: string
+		lineageTag: f5975fbf-c2d8-593c-bbb6-b90ca1546429
+		summarizeBy: none
+
+	column 'Días sin Actualizar' =
+			IF ( ISBLANK ( fact_actividades[fecha_actualizacion] ), BLANK (),
+			     INT ( [Fecha Corte] - fact_actividades[fecha_actualizacion] ) )
+		dataType: int64
+		formatString: 0
+		lineageTag: e1cec274-ae93-57bb-a4bb-f478739efae0
+		summarizeBy: none
+
+	column 'Semáforo Actualización' =
+			VAR evaluable = fact_actividades[fecha_inicio] <= [Fecha Corte] && fact_actividades[estado] <> "Completado"
+			VAR d = fact_actividades[Días sin Actualizar]
+			RETURN
+			    IF ( NOT evaluable, BLANK (),
+			         IF ( ISBLANK ( d ), "Rojo",
+			              IF ( d <= 7, "Verde", IF ( d <= 14, "Amarillo", "Rojo" ) ) ) )
+		dataType: string
+		lineageTag: a79a18fb-0649-506d-8924-08c2d9803c3c
+		summarizeBy: none
+
+	column 'Días para Fin Efectivo' = INT ( fact_actividades[Fin Efectivo] - [Fecha Corte] )
+		dataType: int64
+		formatString: 0
+		lineageTag: d933ddc1-cf0f-51e6-9184-61ef1f9449a8
+		summarizeBy: none
+
+	column 'Situación de Plazo' =
+			VAR d = fact_actividades[Días para Fin Efectivo]
+			RETURN
+			    SWITCH ( TRUE (),
+			        fact_actividades[estado] = "Completado", "Completada",
+			        d <= 0, "Vencida",
+			        d <= 30, "Por vencer 1-30 días",
+			        d <= 60, "Por vencer 31-60 días",
+			        "En plazo" )
+		dataType: string
+		lineageTag: d528b184-53a4-5565-ba54-e4e9d63e57b6
+		summarizeBy: none
+
+	column 'Color Semáforo' = SWITCH ( fact_actividades[Semáforo], "Verde", "#1E9E5A", "Amarillo", "#F5B800", "#D64545" )
+		dataType: string
+		lineageTag: f6a27f7e-4715-51f0-abb7-8e4242ba31db
+		summarizeBy: none
+
+	column 'Color Semáforo Actualización' =
+			SWITCH ( fact_actividades[Semáforo Actualización],
+			    "Verde", "#1E9E5A", "Amarillo", "#F5B800", "Rojo", "#D64545", BLANK () )
+		dataType: string
+		lineageTag: 8ea86209-702b-5ef7-8de2-aaed966d0a8d
+		summarizeBy: none
+
+	column 'Color Situación de Plazo' =
+			SWITCH ( fact_actividades[Situación de Plazo],
+			    "Vencida", "#D64545", "Por vencer 1-30 días", "#E8A020", "Por vencer 31-60 días", "#F5B800",
+			    "En plazo", "#1E9E5A", "#7A8699" )
+		dataType: string
+		lineageTag: 4f29c1bc-4dff-51e7-837d-d5a766c02a5a
+		summarizeBy: none
+
+	partition fact_actividades = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaOrigen & "\fact_actividades.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"id_actividad", type text}, {"id_proyecto", type text}, {"id_responsable", type text}, {"nombre", type text}, {"estado", type text}, {"prioridad", type text}, {"fecha_inicio", type date}, {"fecha_fin", type date}, {"nueva_fecha_fin", type date}, {"av_real", Int64.Type}, {"fecha_actualizacion", type date}, {"motivo_bloqueo", type text}, {"id_predecesora", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,42 @@
+# ===== Power BI: archivos locales (no se versionan) =====
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+**/.pbi/*.abf
+*.pbix
+*.pbit
+*.bak
+
+# ===== Material de referencia local (datos reales / archivos pesados) =====
+htlm/
+Charla_de_Presentacion/
+
+# ===== Copia original de las skills (la version vigente esta en .claude/skills/) =====
+/Skills/
+
+# ===== Secretos y credenciales =====
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+secrets*
+credentials*
+*.secret
+
+# ===== Temporales y entorno =====
+*.tmp
+*.temp
+~$*
+.~lock.*
+__pycache__/
+*.pyc
+.venv/
+venv/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Claude Code: configuracion local =====
+.claude/settings.local.json

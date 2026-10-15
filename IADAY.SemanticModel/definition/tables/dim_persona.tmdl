@@ -1,0 +1,39 @@
+table dim_persona
+	lineageTag: b3f379da-7d19-53ef-800f-91275afe812f
+
+	column id_persona
+		dataType: string
+		lineageTag: 33d56734-6010-57f7-8836-f9c68856647e
+		summarizeBy: none
+		sourceColumn: id_persona
+
+	column nombre_completo
+		dataType: string
+		lineageTag: d2abc347-2108-54d0-8664-815b8c78bb22
+		summarizeBy: none
+		sourceColumn: nombre_completo
+
+	column rol
+		dataType: string
+		lineageTag: 2aa5d3e1-d0fa-59b4-b215-5645cc91282d
+		summarizeBy: none
+		sourceColumn: rol
+
+	column area
+		dataType: string
+		lineageTag: d0f01328-d63f-51c5-ada7-8bc6eba4dbfd
+		summarizeBy: none
+		sourceColumn: area
+
+	partition dim_persona = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaOrigen & "\dim_persona.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"id_persona", type text}, {"nombre_completo", type text}, {"rol", type text}, {"area", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

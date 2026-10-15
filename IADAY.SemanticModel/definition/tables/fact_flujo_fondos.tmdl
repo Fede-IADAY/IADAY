@@ -1,0 +1,43 @@
+table fact_flujo_fondos
+	lineageTag: 5f55ae2e-80d7-5ad1-aa78-5ab0463977d1
+
+	column id_proyecto
+		dataType: string
+		isHidden
+		lineageTag: f5dcd552-4002-546a-9eea-4f13d8434d75
+		summarizeBy: none
+		sourceColumn: id_proyecto
+
+	column mes
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 2ba8db70-34a4-5c94-bad9-683fa38da4d0
+		summarizeBy: none
+		sourceColumn: mes
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column forecast_usd
+		dataType: int64
+		lineageTag: 329ef296-4e12-5cc1-9cc5-630cba9b0b0b
+		summarizeBy: none
+		sourceColumn: forecast_usd
+
+	column real_usd
+		dataType: int64
+		lineageTag: e0743436-226d-55ec-b0b7-6363bb107eb4
+		summarizeBy: none
+		sourceColumn: real_usd
+
+	partition fact_flujo_fondos = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaOrigen & "\fact_flujo_fondos.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"id_proyecto", type text}, {"mes", type date}, {"forecast_usd", Int64.Type}, {"real_usd", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

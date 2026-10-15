@@ -1,0 +1,37 @@
+relationship 9d616d43-aec2-5c86-8af4-e0b6001f9f58
+	fromColumn: fact_actividades.id_proyecto
+	toColumn: dim_proyecto.id_proyecto
+
+relationship 4a5c8fdc-76ee-562b-873a-62983bde3fdc
+	fromColumn: fact_flujo_fondos.id_proyecto
+	toColumn: dim_proyecto.id_proyecto
+
+relationship 327e7673-e06e-539d-81ca-6f0c902fc265
+	fromColumn: fact_solicitudes.id_proyecto
+	toColumn: dim_proyecto.id_proyecto
+
+relationship cf0f12c7-ffad-5ad1-b45b-329940f5b1e0
+	fromColumn: fact_actividades.id_responsable
+	toColumn: dim_persona.id_persona
+
+relationship 8917be6c-2d20-581d-a13e-22889d6875d1
+	fromColumn: fact_solicitudes.id_firmante
+	toColumn: dim_persona.id_persona
+
+relationship 38e6f210-401d-5ad1-88b2-b282060a79ad
+	fromColumn: fact_actividades.fecha_fin
+	toColumn: dim_calendario.fecha
+
+relationship 7e133b64-9af8-5def-891a-f2dca53904b3
+	isActive: false
+	fromColumn: fact_actividades.fecha_inicio
+	toColumn: dim_calendario.fecha
+
+relationship 5e0a3520-3ce8-565a-8f06-86456cc7130d
+	fromColumn: fact_flujo_fondos.mes
+	toColumn: dim_calendario.fecha
+
+relationship 01c0c695-d4c6-591a-84fa-4141b422a0f2
+	fromColumn: fact_solicitudes.fecha_creacion
+	toColumn: dim_calendario.fecha
+

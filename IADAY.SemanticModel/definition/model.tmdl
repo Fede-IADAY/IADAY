@@ -1,0 +1,26 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: es-AR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["dim_calendario","dim_persona","dim_proyecto","fact_actividades","fact_flujo_fondos","fact_solicitudes","parametros","Medidas","RutaOrigen"]
+
+ref table dim_calendario
+ref table dim_persona
+ref table dim_proyecto
+ref table fact_actividades
+ref table fact_flujo_fondos
+ref table fact_solicitudes
+ref table parametros
+ref table Medidas
+
+ref cultureInfo es-ES
+

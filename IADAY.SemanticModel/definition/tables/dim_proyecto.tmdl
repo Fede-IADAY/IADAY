@@ -1,0 +1,111 @@
+table dim_proyecto
+	lineageTag: d8bdc14e-9b86-52bb-93ec-9f50f87bc10a
+
+	column id_proyecto
+		dataType: string
+		lineageTag: 8129f952-8032-53a4-b7df-d08b4b426dcf
+		summarizeBy: none
+		sourceColumn: id_proyecto
+
+	column nombre
+		dataType: string
+		lineageTag: 120e1946-c258-5fe0-a0f7-6a825bf93443
+		summarizeBy: none
+		sourceColumn: nombre
+
+	column descripcion
+		dataType: string
+		lineageTag: f0854756-efc7-5dde-8c42-e6d8f6d359c1
+		summarizeBy: none
+		sourceColumn: descripcion
+
+	column area
+		dataType: string
+		lineageTag: 99d7a20e-02b5-579a-bca9-916e80cb498d
+		summarizeBy: none
+		sourceColumn: area
+
+	column tipo_ia
+		dataType: string
+		lineageTag: e0b5235c-6997-59f5-b1a9-30e138845556
+		summarizeBy: none
+		sourceColumn: tipo_ia
+
+	column fase
+		dataType: string
+		lineageTag: 9a90f137-eb66-581a-8d2b-80b9bec5f099
+		summarizeBy: none
+		sourceColumn: fase
+
+	column id_sponsor
+		dataType: string
+		isHidden
+		lineageTag: cc72672b-faac-52a0-8a61-8cc5060e5082
+		summarizeBy: none
+		sourceColumn: id_sponsor
+
+	column id_lider
+		dataType: string
+		isHidden
+		lineageTag: a129fb6b-fd62-536b-b9d8-3d1ba9c9e923
+		summarizeBy: none
+		sourceColumn: id_lider
+
+	column id_coordinador_portafolio
+		dataType: string
+		isHidden
+		lineageTag: a15d4cb6-905a-5126-b792-3eb899f260bf
+		summarizeBy: none
+		sourceColumn: id_coordinador_portafolio
+
+	column fecha_inicio
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5d8ce7e0-7c5e-5024-bdd7-f2c9ab8dad3c
+		summarizeBy: none
+		sourceColumn: fecha_inicio
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fecha_fin
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 41655824-076e-5b2a-90dc-167db2e89e02
+		summarizeBy: none
+		sourceColumn: fecha_fin
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column presupuesto_aprobado_usd
+		dataType: int64
+		lineageTag: 811cf1dd-bd6f-5cbe-9c74-521f352c06fe
+		summarizeBy: none
+		sourceColumn: presupuesto_aprobado_usd
+
+	column 'Sponsor Ejecutivo' = LOOKUPVALUE ( dim_persona[nombre_completo], dim_persona[id_persona], dim_proyecto[id_sponsor] )
+		dataType: string
+		lineageTag: 15bc619a-b5c4-5739-8805-36a77acea4ba
+		summarizeBy: none
+
+	column 'Líder de Iniciativa' = LOOKUPVALUE ( dim_persona[nombre_completo], dim_persona[id_persona], dim_proyecto[id_lider] )
+		dataType: string
+		lineageTag: 50e3df5e-6cdd-5e5f-b56e-c8cabe7c7f1c
+		summarizeBy: none
+
+	column 'Coordinador de Portafolio IA' = LOOKUPVALUE ( dim_persona[nombre_completo], dim_persona[id_persona], dim_proyecto[id_coordinador_portafolio] )
+		dataType: string
+		lineageTag: c4168990-d7fa-5020-8483-797c1c6c6ee6
+		summarizeBy: none
+
+	partition dim_proyecto = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaOrigen & "\dim_proyecto.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"id_proyecto", type text}, {"nombre", type text}, {"descripcion", type text}, {"area", type text}, {"tipo_ia", type text}, {"fase", type text}, {"id_sponsor", type text}, {"id_lider", type text}, {"id_coordinador_portafolio", type text}, {"fecha_inicio", type date}, {"fecha_fin", type date}, {"presupuesto_aprobado_usd", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

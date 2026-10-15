@@ -1,0 +1,66 @@
+table dim_calendario
+	lineageTag: fc78c697-9678-52c4-923c-93f973426bce
+	dataCategory: Time
+
+	column fecha
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: f2724d81-febf-52aa-8591-ab304d30ee64
+		summarizeBy: none
+		sourceColumn: fecha
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: 1834eac3-59a6-5911-8866-7fc2155c2690
+		summarizeBy: none
+		sourceColumn: anio
+
+	column mes_numero
+		dataType: int64
+		formatString: 0
+		lineageTag: 6708faa3-bad7-5e61-8d2a-1860fd9cd7f6
+		summarizeBy: none
+		sourceColumn: mes_numero
+
+	column mes
+		dataType: string
+		lineageTag: 48aefbac-3371-5b93-abf2-6a38ca44cd0c
+		summarizeBy: none
+		sourceColumn: mes
+		sortByColumn: mes_numero
+
+	column anio_mes
+		dataType: string
+		lineageTag: 40e5fe3d-52a1-5308-b4f9-27b8120e2322
+		summarizeBy: none
+		sourceColumn: anio_mes
+
+	column trimestre
+		dataType: string
+		lineageTag: 78ceb223-82b0-5038-b138-2158dbf20945
+		summarizeBy: none
+		sourceColumn: trimestre
+
+	partition dim_calendario = m
+		mode: import
+		source =
+				let
+				    Inicio = #date(2026, 1, 1),
+				    Fin = #date(2027, 12, 31),
+				    Dias = List.Dates(Inicio, Number.From(Fin - Inicio) + 1, #duration(1, 0, 0, 0)),
+				    Tabla = Table.FromList(Dias, Splitter.SplitByNothing(), {"fecha"}, null, ExtraValues.Error),
+				    Fechas = Table.TransformColumnTypes(Tabla, {{"fecha", type date}}),
+				    Anio = Table.AddColumn(Fechas, "anio", each Date.Year([fecha]), Int64.Type),
+				    MesNum = Table.AddColumn(Anio, "mes_numero", each Date.Month([fecha]), Int64.Type),
+				    Mes = Table.AddColumn(MesNum, "mes", each Text.Proper(Date.MonthName([fecha], "es-ES")), type text),
+				    AnioMes = Table.AddColumn(Mes, "anio_mes", each Date.ToText([fecha], "yyyy-MM"), type text),
+				    Trimestre = Table.AddColumn(AnioMes, "trimestre", each "T" & Text.From(Date.QuarterOfYear([fecha])), type text)
+				in
+				    Trimestre
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,27 @@
+id_solicitud,id_proyecto,tipo,id_firmante,fecha_creacion,fecha_resolucion,estado
+SOL-0001,INI-004,Cambio de Alcance,PER-009,2026-04-30,2026-05-17,Firmada
+SOL-0002,INI-005,Cambio de Alcance,PER-010,2026-04-30,2026-05-27,Firmada
+SOL-0003,INI-006,Ajuste de Presupuesto,PER-003,2026-05-10,2026-05-29,Rechazada
+SOL-0004,INI-002,Ajuste de Presupuesto,PER-002,2026-05-18,2026-05-22,Rechazada
+SOL-0005,INI-009,Ajuste de Presupuesto,PER-003,2026-06-02,2026-06-17,Rechazada
+SOL-0006,INI-009,Cambio de Alcance,PER-005,2026-06-02,2026-06-14,Firmada
+SOL-0007,INI-010,Cambio de Alcance,PER-004,2026-06-16,2026-06-22,Firmada
+SOL-0008,INI-001,Cambio de Alcance,PER-004,2026-06-27,2026-07-25,Firmada
+SOL-0009,INI-005,Cambio de Alcance,PER-005,2026-06-27,2026-06-30,Firmada
+SOL-0010,INI-006,Ajuste de Presupuesto,PER-003,2026-07-15,2026-07-31,Firmada
+SOL-0011,INI-004,Replanificación de Cronograma,PER-009,2026-07-30,2026-08-10,Rechazada
+SOL-0012,INI-004,Cambio de Alcance,PER-009,2026-08-01,2026-08-18,Firmada
+SOL-0013,INI-005,Replanificación de Cronograma,PER-005,2026-08-05,2026-09-02,Firmada
+SOL-0014,INI-006,Cierre y Transición a Operaciones,PER-003,2026-08-11,2026-08-17,Firmada
+SOL-0015,INI-010,Ajuste de Presupuesto,PER-001,2026-08-17,2026-08-23,Firmada
+SOL-0016,INI-011,Ajuste de Presupuesto,PER-001,2026-08-18,2026-09-07,Firmada
+SOL-0017,INI-010,Cambio de Alcance,PER-004,2026-08-26,,Pendiente de firma
+SOL-0018,INI-002,Replanificación de Cronograma,PER-004,2026-09-01,,Pendiente de firma
+SOL-0019,INI-002,Ajuste de Presupuesto,PER-002,2026-09-02,,Pendiente de firma
+SOL-0020,INI-003,Replanificación de Cronograma,PER-008,2026-09-05,,Pendiente de firma
+SOL-0021,INI-008,Cierre y Transición a Operaciones,PER-003,2026-09-10,,Pendiente de firma
+SOL-0022,INI-007,Cambio de Alcance,PER-007,2026-09-17,,Pendiente de firma
+SOL-0023,INI-003,Ajuste de Presupuesto,PER-001,2026-09-19,,Pendiente de firma
+SOL-0024,INI-006,Replanificación de Cronograma,PER-011,2026-09-20,,Pendiente de firma
+SOL-0025,INI-003,Cierre y Transición a Operaciones,PER-001,2026-09-28,,Pendiente de firma
+SOL-0026,INI-011,Replanificación de Cronograma,PER-006,2026-10-02,,Pendiente de firma

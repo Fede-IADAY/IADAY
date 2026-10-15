@@ -1,0 +1,22 @@
+table parametros
+	lineageTag: 65bf29bb-4c7b-5e58-ae93-50cf959310a8
+
+	column fecha_corte
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 77b3e73b-592d-5fa6-a904-a7f23f734f47
+		summarizeBy: none
+		sourceColumn: fecha_corte
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition parametros = m
+		mode: import
+		source =
+				let
+				    Origen = #table(type table [fecha_corte = date], {{#date(2026, 10, 9)}})
+				in
+				    Origen
+
+	annotation PBI_ResultType = Table
+

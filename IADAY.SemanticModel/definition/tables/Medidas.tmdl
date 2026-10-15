@@ -1,0 +1,313 @@
+table Medidas
+	lineageTag: bc4cea98-9353-57c1-9f14-70c898252f1d
+
+	/// Fecha de corte única del tablero (09/10/2026). Reemplaza a TODAY().
+	measure 'Fecha Corte' = MAX ( parametros[fecha_corte] )
+		formatString: dd/mm/yyyy
+		displayFolder: Parámetros
+		lineageTag: 7bc492d4-39b5-530e-8138-6f0ad7aaf5ad
+
+	/// R1. Cantidad de actividades.
+	measure 'Total Actividades' = COUNTROWS ( fact_actividades )
+		formatString: #,0
+		displayFolder: Actividades
+		lineageTag: 14d26290-3a94-562c-8710-f1df63c024c3
+
+	/// R1. Actividades en estado Completado.
+	measure Completadas = CALCULATE ( [Total Actividades], fact_actividades[estado] = "Completado" )
+		formatString: #,0
+		displayFolder: Actividades
+		lineageTag: 24293e37-f635-5f29-8732-efe2a3022b41
+
+	/// R1. Actividades en estado Bloqueado.
+	measure Bloqueadas = CALCULATE ( [Total Actividades], fact_actividades[estado] = "Bloqueado" )
+		formatString: #,0
+		displayFolder: Actividades
+		lineageTag: f4cc3d5b-298b-504a-8866-0a42086fe49a
+
+	/// R1. Actividades en estado En Curso.
+	measure 'En Curso' = CALCULATE ( [Total Actividades], fact_actividades[estado] = "En Curso" )
+		formatString: #,0
+		displayFolder: Actividades
+		lineageTag: 7dfe62e5-2f97-5c5e-b943-a6b56260e721
+
+	/// R1. Actividades en estado En Revisión.
+	measure 'En Revisión' = CALCULATE ( [Total Actividades], fact_actividades[estado] = "En Revisión" )
+		formatString: #,0
+		displayFolder: Actividades
+		lineageTag: 07b87d3b-6269-518f-baba-35c78f3c67bd
+
+	/// R1. Actividades en estado Pendiente.
+	measure Pendientes = CALCULATE ( [Total Actividades], fact_actividades[estado] = "Pendiente" )
+		formatString: #,0
+		displayFolder: Actividades
+		lineageTag: fb5018f0-1e09-5dd7-878f-24e91d958a12
+
+	/// R5. Promedio simple del avance real.
+	measure '% Avance Real' = AVERAGE ( fact_actividades[av_real] ) / 100
+		formatString: 0.0%
+		displayFolder: Avance
+		lineageTag: 9955324a-fcc6-53bd-ba4a-847d6565659d
+
+	/// R2 y R5. Promedio simple del avance planificado lineal.
+	measure '% Avance Planificado' = AVERAGE ( fact_actividades[Avance Planificado] ) / 100
+		formatString: 0.0%
+		displayFolder: Avance
+		lineageTag: 1652073e-9a1e-5a94-a35e-60aab4e95043
+
+	/// R3. Desvío en puntos porcentuales entre promedios.
+	measure 'Desvío Global' = MAX ( 0, [% Avance Planificado] - [% Avance Real] ) * 100
+		formatString: 0.0
+		displayFolder: Avance
+		lineageTag: 9e97e7b4-a2a5-550b-8a35-21a7ba7c7adc
+
+	/// R4. Semáforo agregado según el desvío entre promedios (supuesto S8).
+	measure 'Semáforo Iniciativa' =
+			VAR d = ROUND ( [Desvío Global], 0 )
+			RETURN
+			    SWITCH ( TRUE (), d <= 5, "Verde", d <= 9, "Amarillo", "Rojo" )
+		displayFolder: Avance
+		lineageTag: 30cdcd73-f3a9-52d3-94b9-2a019544882d
+
+	/// R4. Actividades con desvío de 0 a 5.
+	measure 'Actividades Verde' = CALCULATE ( [Total Actividades], fact_actividades[Semáforo] = "Verde" )
+		formatString: #,0
+		displayFolder: Semáforo
+		lineageTag: b948c381-1b4a-5620-9b00-5b352f212609
+
+	/// R4. Actividades con desvío de 6 a 9.
+	measure 'Actividades Amarillo' = CALCULATE ( [Total Actividades], fact_actividades[Semáforo] = "Amarillo" )
+		formatString: #,0
+		displayFolder: Semáforo
+		lineageTag: 71c620c7-2119-517b-895d-a246d14df9e4
+
+	/// R4. Actividades con desvío de 10 o más.
+	measure 'Actividades Rojo' = CALCULATE ( [Total Actividades], fact_actividades[Semáforo] = "Rojo" )
+		formatString: #,0
+		displayFolder: Semáforo
+		lineageTag: 3953cf84-47cf-5961-b77f-7337c34f5f5e
+
+	/// R6. Fin efectivo menor o igual al corte y no Completada.
+	measure Vencidas =
+			VAR c = [Fecha Corte]
+			RETURN
+			    CALCULATE ( [Total Actividades],
+			        fact_actividades[estado] <> "Completado",
+			        fact_actividades[Fin Efectivo] <= c )
+		formatString: #,0
+		displayFolder: Vencimientos
+		lineageTag: c256b2ac-9846-5c1b-8d13-c247b6819ca6
+
+	/// R7. Vencen en 1 a 60 días (no Completadas).
+	measure 'Por Vencer 60' =
+			VAR c = [Fecha Corte]
+			RETURN
+			    CALCULATE ( [Total Actividades],
+			        fact_actividades[estado] <> "Completado",
+			        fact_actividades[Fin Efectivo] > c,
+			        fact_actividades[Fin Efectivo] <= c + 60 )
+		formatString: #,0
+		displayFolder: Vencimientos
+		lineageTag: 80073186-51fa-550d-a026-c79768ba2264
+
+	/// R7. Vencen en 1 a 30 días (no Completadas).
+	measure 'Por Vencer 30' =
+			VAR c = [Fecha Corte]
+			RETURN
+			    CALCULATE ( [Total Actividades],
+			        fact_actividades[estado] <> "Completado",
+			        fact_actividades[Fin Efectivo] > c,
+			        fact_actividades[Fin Efectivo] <= c + 30 )
+		formatString: #,0
+		displayFolder: Vencimientos
+		lineageTag: db607fc6-2d1d-5e88-baef-714cda6155a8
+
+	/// R8. Iniciadas y no Completadas.
+	measure 'Actividades Evaluables Actualización' = CALCULATE ( [Total Actividades], NOT ISBLANK ( fact_actividades[Semáforo Actualización] ) )
+		formatString: #,0
+		displayFolder: Actualización
+		lineageTag: 74e8ccf0-c1f9-538a-8fcf-3f9a9774a8bd
+
+	/// R8. Actualizadas hace 7 días o menos.
+	measure 'Actualización Verde' = CALCULATE ( [Total Actividades], fact_actividades[Semáforo Actualización] = "Verde" )
+		formatString: #,0
+		displayFolder: Actualización
+		lineageTag: ca4c7f7c-31cb-5616-b569-c9475642f33b
+
+	/// R8. Actualizadas hace 8 a 14 días.
+	measure 'Actualización Amarillo' = CALCULATE ( [Total Actividades], fact_actividades[Semáforo Actualización] = "Amarillo" )
+		formatString: #,0
+		displayFolder: Actualización
+		lineageTag: a5bd0dd5-71d3-57eb-b508-990fb895bc0b
+
+	/// R8. Más de 14 días o sin fecha de actualización.
+	measure 'Actualización Rojo' = CALCULATE ( [Total Actividades], fact_actividades[Semáforo Actualización] = "Rojo" )
+		formatString: #,0
+		displayFolder: Actualización
+		lineageTag: 0b58d215-e6bf-5af3-b861-c1fe6a178200
+
+	/// R8. Evaluables sin fecha de actualización.
+	measure 'Sin Fecha de Actualización' =
+			CALCULATE ( [Total Actividades],
+			    NOT ISBLANK ( fact_actividades[Semáforo Actualización] ),
+			    ISBLANK ( fact_actividades[fecha_actualizacion] ) )
+		formatString: #,0
+		displayFolder: Actualización
+		lineageTag: 0874b397-bbc2-52b4-863a-75e974dc5b61
+
+	/// R10. Presupuesto aprobado (USD).
+	measure 'Presupuesto Aprobado' = SUM ( dim_proyecto[presupuesto_aprobado_usd] )
+		formatString: \$#,0
+		displayFolder: Flujo de Fondos
+		lineageTag: aa9ccd77-3393-522d-8daa-f2a52cb91b42
+
+	/// R9. Gasto previsto (USD).
+	measure 'Forecast Total' = SUM ( fact_flujo_fondos[forecast_usd] )
+		formatString: \$#,0
+		displayFolder: Flujo de Fondos
+		lineageTag: 9017ac2f-bfbf-5a6a-9011-2bf479b65bf2
+
+	/// R9. Gasto real acumulado (USD).
+	measure 'Real Total' = SUM ( fact_flujo_fondos[real_usd] )
+		formatString: \$#,0
+		displayFolder: Flujo de Fondos
+		lineageTag: 8f34b32f-847f-5cb9-80b4-ff42a98b9856
+
+	/// R9. Forecast menos real.
+	measure Pendiente = [Forecast Total] - [Real Total]
+		formatString: \$#,0
+		displayFolder: Flujo de Fondos
+		lineageTag: 6fb4982b-8d1f-5c2b-9662-12f384c38445
+
+	/// R9. Real sobre forecast total.
+	measure '% Ejecución' = DIVIDE ( [Real Total], [Forecast Total] )
+		formatString: 0.0%
+		displayFolder: Flujo de Fondos
+		lineageTag: 58728e87-1302-56bd-ac66-a6e1a44709a6
+
+	/// S6. Forecast de meses anteriores al mes de corte.
+	measure 'Forecast Meses Cerrados' =
+			VAR c = [Fecha Corte]
+			RETURN
+			    CALCULATE ( [Forecast Total], fact_flujo_fondos[mes] < DATE ( YEAR ( c ), MONTH ( c ), 1 ) )
+		formatString: \$#,0
+		displayFolder: Flujo de Fondos
+		lineageTag: c6856fc7-9048-5de8-965b-6bd6d1dc3b5b
+
+	/// S6. Real de meses anteriores al mes de corte.
+	measure 'Real Meses Cerrados' =
+			VAR c = [Fecha Corte]
+			RETURN
+			    CALCULATE ( [Real Total], fact_flujo_fondos[mes] < DATE ( YEAR ( c ), MONTH ( c ), 1 ) )
+		formatString: \$#,0
+		displayFolder: Flujo de Fondos
+		lineageTag: 1df0c744-8429-5c1a-bbb2-e435d33d1ae2
+
+	/// S6. Real sobre forecast de meses cerrados.
+	measure '% Cumplimiento Meses Cerrados' = DIVIDE ( [Real Meses Cerrados], [Forecast Meses Cerrados] )
+		formatString: 0.0%
+		displayFolder: Flujo de Fondos
+		lineageTag: be89ac83-0b41-5d35-add6-4b054f7fad90
+
+	/// R9. Real sobre presupuesto aprobado.
+	measure '% Inversión Ejecutada' = DIVIDE ( [Real Total], [Presupuesto Aprobado] )
+		formatString: 0.0%
+		displayFolder: Flujo de Fondos
+		lineageTag: 44367088-d13c-5324-b6ed-6207beef3394
+
+	/// Cantidad de solicitudes.
+	measure 'Total Solicitudes' = COUNTROWS ( fact_solicitudes )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: 0ef2898c-0a18-57c8-8a85-59a72c219d8b
+
+	/// Solicitudes pendientes de firma.
+	measure 'Solicitudes Abiertas' = CALCULATE ( [Total Solicitudes], fact_solicitudes[estado] = "Pendiente de firma" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: 99a82a6e-bb4f-52ef-ae4c-3b2a1bfa933b
+
+	/// Días promedio de las solicitudes abiertas al corte.
+	measure 'Días Promedio Abiertas' = CALCULATE ( AVERAGE ( fact_solicitudes[Días de Firma] ), fact_solicitudes[estado] = "Pendiente de firma" )
+		formatString: 0.0
+		displayFolder: Solicitudes
+		lineageTag: 58757d59-4b81-5cea-a1d6-d193f58735ca
+
+	/// S7. Días de firma menores o iguales a 15.
+	measure 'Solicitudes Verde' = CALCULATE ( [Total Solicitudes], fact_solicitudes[Semáforo Firma] = "Verde" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: 7b1270df-3039-5728-b7c5-ddb4d6f087be
+
+	/// S7. Días de firma de 16 a 30.
+	measure 'Solicitudes Amarillo' = CALCULATE ( [Total Solicitudes], fact_solicitudes[Semáforo Firma] = "Amarillo" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: dc02edab-dd5a-520d-bb19-448d2ecc97e3
+
+	/// S7. Días de firma mayores a 30.
+	measure 'Solicitudes Rojo' = CALCULATE ( [Total Solicitudes], fact_solicitudes[Semáforo Firma] = "Rojo" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: 7a229de7-0d3e-57d7-a686-95f15eec3833
+
+	/// S7. Abiertas con 15 días o menos.
+	measure 'Abiertas Verde' = CALCULATE ( [Total Solicitudes], fact_solicitudes[estado] = "Pendiente de firma", fact_solicitudes[Semáforo Firma] = "Verde" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: 13da2d0e-87f0-570c-895c-a2b1de7b638f
+
+	/// S7. Abiertas con 16 a 30 días.
+	measure 'Abiertas Amarillo' = CALCULATE ( [Total Solicitudes], fact_solicitudes[estado] = "Pendiente de firma", fact_solicitudes[Semáforo Firma] = "Amarillo" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: b47ae71c-2dd6-5b52-9e79-20607b2de858
+
+	/// S7. Abiertas con más de 30 días.
+	measure 'Abiertas Rojo' = CALCULATE ( [Total Solicitudes], fact_solicitudes[estado] = "Pendiente de firma", fact_solicitudes[Semáforo Firma] = "Rojo" )
+		formatString: #,0
+		displayFolder: Solicitudes
+		lineageTag: fd9501f7-6aa5-5f43-a038-5bc50dfa58b7
+
+	/// R4. Color hexadecimal del semáforo de la iniciativa (para formato condicional).
+	measure 'Color Semáforo Iniciativa' = SWITCH ( [Semáforo Iniciativa], "Verde", "#1E9E5A", "Amarillo", "#F5B800", "Rojo", "#D64545", BLANK () )
+		displayFolder: Semáforo
+		lineageTag: 9132dfb6-071b-5b6d-a63f-f9da90dcc3a1
+
+	/// R7. Vencen en 31 a 60 días (no Completadas).
+	measure 'Por Vencer 31-60' = CALCULATE ( [Total Actividades], fact_actividades[Situación de Plazo] = "Por vencer 31-60 días" )
+		formatString: #,0
+		displayFolder: Vencimientos
+		lineageTag: 1241febd-ad6b-5e4c-8fa7-39f51b7073d6
+
+	/// R7. No Completadas con más de 60 días para vencer.
+	measure 'Actividades En Plazo' = CALCULATE ( [Total Actividades], fact_actividades[Situación de Plazo] = "En plazo" )
+		formatString: #,0
+		displayFolder: Vencimientos
+		lineageTag: 462d3555-0a21-595a-a9b2-951755c7e5ba
+
+	/// R6. Días promedio de atraso de las actividades vencidas.
+	measure 'Días de Atraso Promedio' =
+			CALCULATE ( - AVERAGE ( fact_actividades[Días para Fin Efectivo] ),
+			    fact_actividades[Situación de Plazo] = "Vencida" )
+		formatString: 0.0
+		displayFolder: Vencimientos
+		lineageTag: 9dbe5b0c-85ab-53c1-aa21-f47ee563f944
+
+	column Medida
+		dataType: string
+		isHidden
+		lineageTag: 2f4788d3-6a3e-5b0f-a006-9090b369f8b4
+		summarizeBy: none
+		sourceColumn: Medida
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Origen = #table(type table [Medida = text], {})
+				in
+				    Origen
+
+	annotation PBI_ResultType = Table
+

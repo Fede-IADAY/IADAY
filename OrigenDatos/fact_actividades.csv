@@ -1,0 +1,171 @@
+id_actividad,id_proyecto,id_responsable,nombre,estado,prioridad,fecha_inicio,fecha_fin,nueva_fecha_fin,av_real,fecha_actualizacion,motivo_bloqueo,id_predecesora
+ACT-0001,INI-001,PER-016,Relevamiento de casos de uso – asistente de RRHH,Completado,Alta,2026-03-02,2026-04-17,,100,2026-04-22,,
+ACT-0002,INI-001,PER-016,Definición de alcance y criterios de éxito – asistente de RRHH,Completado,Media,2026-03-18,2026-05-19,,100,2026-05-24,,ACT-0001
+ACT-0003,INI-001,PER-012,Análisis de calidad de datos – asistente de RRHH,Completado,Media,2026-04-03,2026-06-08,,100,2026-06-12,,ACT-0002
+ACT-0004,INI-001,PER-019,Preparación y curado de datos – asistente de RRHH,Completado,Media,2026-04-20,2026-06-23,,100,2026-06-28,,ACT-0003
+ACT-0005,INI-001,PER-012,Carga y curado de la base de políticas de RRHH,Completado,Alta,2026-05-06,2026-07-15,,100,2026-07-20,,ACT-0004
+ACT-0006,INI-001,PER-014,Prototipo funcional – asistente de RRHH,Completado,Baja,2026-05-22,2026-07-17,,100,2026-07-18,,ACT-0005
+ACT-0007,INI-001,PER-014,Ingeniería de prompts y ajuste del modelo – asistente de RRHH,Completado,Alta,2026-06-08,2026-07-24,,100,2026-07-26,,ACT-0006
+ACT-0008,INI-001,PER-019,Evaluación de calidad y sesgos – asistente de RRHH,Completado,Media,2026-06-24,2026-08-28,,100,2026-09-01,,ACT-0007
+ACT-0009,INI-001,PER-019,Integración con el portal del colaborador,Completado,Baja,2026-07-10,2026-08-28,,100,2026-09-01,,ACT-0008
+ACT-0010,INI-001,PER-016,Pruebas con usuarios clave – asistente de RRHH,Completado,Media,2026-07-27,2026-09-15,,100,2026-09-17,,ACT-0009
+ACT-0011,INI-001,PER-016,Piloto con el equipo de People,Completado,Baja,2026-08-12,2026-09-30,,100,2026-10-03,,ACT-0010
+ACT-0012,INI-001,PER-012,Plan de capacitación – asistente de RRHH,En Curso,Baja,2026-08-31,2026-11-20,,47,2026-09-24,,ACT-0011
+ACT-0013,INI-001,PER-012,Despliegue en producción – asistente de RRHH,En Curso,Media,2026-09-14,2026-12-11,,20,2026-10-04,,ACT-0012
+ACT-0014,INI-001,PER-012,Documentación técnica y funcional – asistente de RRHH,En Curso,Media,2026-09-30,2026-12-11,,6,2026-10-07,,ACT-0013
+ACT-0015,INI-001,PER-012,Gestión del cambio y adopción – asistente de RRHH,Pendiente,Baja,2026-10-19,2026-12-18,,0,,,ACT-0014
+ACT-0016,INI-001,PER-016,Cierre y transferencia a operaciones – asistente de RRHH,Pendiente,Baja,2026-11-02,2026-12-18,,0,,,ACT-0015
+ACT-0017,INI-002,PER-019,Relevamiento de casos de uso – copilot corporativo,Completado,Media,2026-02-02,2026-04-17,,100,2026-04-20,,
+ACT-0018,INI-002,PER-019,Definición de alcance y criterios de éxito – copilot corporativo,Completado,Media,2026-02-23,2026-04-29,,100,2026-04-30,,ACT-0017
+ACT-0019,INI-002,PER-020,Análisis de calidad de datos – copilot corporativo,Completado,Baja,2026-03-13,2026-05-08,,100,2026-05-13,,ACT-0018
+ACT-0020,INI-002,PER-020,Diseño de arquitectura de la solución – copilot corporativo,Completado,Baja,2026-04-02,2026-06-30,,100,2026-07-01,,ACT-0019
+ACT-0021,INI-002,PER-018,Preparación y curado de datos – copilot corporativo,Completado,Media,2026-04-22,2026-07-30,,100,2026-07-31,,ACT-0020
+ACT-0022,INI-002,PER-012,Conexión con repositorios documentales,Completado,Media,2026-05-12,2026-07-30,,100,2026-07-30,,ACT-0021
+ACT-0023,INI-002,PER-019,Prototipo funcional – copilot corporativo,Completado,Baja,2026-06-01,2026-09-11,,100,2026-09-14,,ACT-0022
+ACT-0024,INI-002,PER-019,Ingeniería de prompts y ajuste del modelo – copilot corporativo,En Revisión,Media,2026-06-22,2026-09-23,,88,2026-10-04,,ACT-0023
+ACT-0025,INI-002,PER-012,Evaluación de calidad y sesgos – copilot corporativo,En Revisión,Alta,2026-07-13,2026-10-26,2026-11-14,76,2026-09-18,,ACT-0024
+ACT-0026,INI-002,PER-020,Revisión de seguridad y privacidad – copilot corporativo,En Curso,Media,2026-07-31,2026-11-17,,62,2026-09-30,,ACT-0025
+ACT-0027,INI-002,PER-018,Integración con suite de ofimática,En Curso,Alta,2026-08-20,2026-12-08,2027-01-03,29,2026-10-05,,ACT-0026
+ACT-0028,INI-002,PER-020,Pruebas con usuarios clave – copilot corporativo,En Curso,Media,2026-09-09,2026-12-11,,15,2026-10-01,,ACT-0027
+ACT-0029,INI-002,PER-020,Despliegue por oleadas,En Curso,Media,2026-09-29,2026-12-11,2026-12-25,5,2026-10-01,,ACT-0028
+ACT-0030,INI-002,PER-012,Plan de capacitación – copilot corporativo,Pendiente,Media,2026-10-19,2026-12-22,,0,,,ACT-0029
+ACT-0031,INI-002,PER-018,Despliegue en producción – copilot corporativo,Pendiente,Alta,2026-11-09,2027-02-12,,0,,,ACT-0030
+ACT-0032,INI-002,PER-019,Monitoreo y observabilidad – copilot corporativo,Pendiente,Baja,2026-11-30,2027-02-12,,0,,,ACT-0031
+ACT-0033,INI-002,PER-012,Documentación técnica y funcional – copilot corporativo,Pendiente,Alta,2026-12-18,2027-03-18,,0,,,ACT-0032
+ACT-0034,INI-002,PER-019,Gestión del cambio y adopción – copilot corporativo,Pendiente,Media,2027-01-07,2027-03-31,,0,,,ACT-0033
+ACT-0035,INI-002,PER-020,Cierre y transferencia a operaciones – copilot corporativo,Pendiente,Alta,2027-01-27,2027-03-31,,0,,,ACT-0034
+ACT-0036,INI-003,PER-017,Relevamiento de casos de uso – motor de reportes,Completado,Baja,2026-01-12,2026-03-25,,100,2026-03-26,,
+ACT-0037,INI-003,PER-020,Definición de alcance y criterios de éxito – motor de reportes,Completado,Media,2026-02-02,2026-04-09,,100,2026-04-10,,ACT-0036
+ACT-0038,INI-003,PER-018,Diseño de arquitectura de la solución – motor de reportes,Completado,Media,2026-02-23,2026-06-05,,100,2026-06-10,,ACT-0037
+ACT-0039,INI-003,PER-017,Preparación y curado de datos – motor de reportes,Completado,Baja,2026-03-16,2026-06-05,,100,2026-06-05,,ACT-0038
+ACT-0040,INI-003,PER-014,Prototipo funcional – motor de reportes,Completado,Alta,2026-04-06,2026-07-17,,100,2026-07-22,,ACT-0039
+ACT-0041,INI-003,PER-018,Ingeniería de prompts y ajuste del modelo – motor de reportes,Completado,Media,2026-04-24,2026-07-17,,100,2026-07-17,,ACT-0040
+ACT-0042,INI-003,PER-017,Evaluación de calidad y sesgos – motor de reportes,Completado,Media,2026-05-15,2026-07-31,,100,2026-08-01,,ACT-0041
+ACT-0043,INI-003,PER-014,Plantillas dinámicas de reporte,Completado,Alta,2026-06-04,2026-09-18,,100,2026-09-18,,ACT-0042
+ACT-0044,INI-003,PER-017,Pruebas con usuarios clave – motor de reportes,En Curso,Media,2026-06-25,2026-09-18,,66,2026-10-03,,ACT-0043
+ACT-0045,INI-003,PER-018,Validación con Control de Gestión,En Curso,Media,2026-07-15,2026-10-20,,56,2026-10-02,,ACT-0044
+ACT-0046,INI-003,PER-017,Despliegue en producción – motor de reportes,En Curso,Media,2026-08-05,2026-11-16,,42,2026-09-19,,ACT-0045
+ACT-0047,INI-003,PER-020,Monitoreo y observabilidad – motor de reportes,En Curso,Alta,2026-08-25,2026-11-17,,28,2026-10-08,,ACT-0046
+ACT-0048,INI-003,PER-017,Gestión del cambio y adopción – motor de reportes,En Curso,Media,2026-09-15,2026-11-17,2026-11-27,22,2026-10-09,,ACT-0047
+ACT-0049,INI-003,PER-020,Cierre y transferencia a operaciones – motor de reportes,En Curso,Media,2026-10-05,2026-11-27,,4,2026-10-05,,ACT-0048
+ACT-0050,INI-004,PER-015,Relevamiento de casos de uso – motor de calidad de datos,Completado,Media,2026-04-06,2026-06-08,,100,2026-06-08,,
+ACT-0051,INI-004,PER-016,Definición de alcance y criterios de éxito – motor de calidad de datos,Completado,Media,2026-04-23,2026-07-01,,100,2026-07-04,,ACT-0050
+ACT-0052,INI-004,PER-015,Análisis de calidad de datos – motor de calidad de datos,En Revisión,Alta,2026-05-11,2026-07-30,,87,2026-09-04,,ACT-0051
+ACT-0053,INI-004,PER-013,Diseño de arquitectura de la solución – motor de calidad de datos,Bloqueado,Alta,2026-05-27,2026-07-30,,74,2026-10-02,Dependencia de proveedor externo,ACT-0052
+ACT-0054,INI-004,PER-016,Preparación y curado de datos – motor de calidad de datos,Bloqueado,Media,2026-06-15,2026-08-13,,63,2026-09-09,Pendiente de aprobación de seguridad,ACT-0053
+ACT-0055,INI-004,PER-020,Prototipo funcional – motor de calidad de datos,En Curso,Media,2026-07-01,2026-09-11,,48,2026-09-02,,ACT-0054
+ACT-0056,INI-004,PER-013,Ingeniería de prompts y ajuste del modelo – motor de calidad de datos,En Curso,Media,2026-07-20,2026-10-23,2026-11-02,44,2026-09-09,,ACT-0055
+ACT-0057,INI-004,PER-016,Evaluación de calidad y sesgos – motor de calidad de datos,En Curso,Baja,2026-08-04,2026-10-23,,32,2026-09-10,,ACT-0056
+ACT-0058,INI-004,PER-013,Revisión de seguridad y privacidad – motor de calidad de datos,En Curso,Media,2026-08-24,2026-10-23,,24,2026-09-30,,ACT-0057
+ACT-0059,INI-004,PER-016,Conectores a fuentes maestras,En Curso,Alta,2026-09-08,2026-10-28,,18,2026-10-03,,ACT-0058
+ACT-0060,INI-004,PER-020,Pruebas con usuarios clave – motor de calidad de datos,En Curso,Alta,2026-09-25,2026-11-13,,3,2026-09-25,,ACT-0059
+ACT-0061,INI-004,PER-013,Tablero de calidad por dominio,Pendiente,Alta,2026-10-12,2026-12-30,,0,,,ACT-0060
+ACT-0062,INI-004,PER-016,Despliegue en producción – motor de calidad de datos,Pendiente,Alta,2026-10-30,2026-12-30,,0,,,ACT-0061
+ACT-0063,INI-004,PER-016,Monitoreo y observabilidad – motor de calidad de datos,Pendiente,Baja,2026-11-16,2027-01-12,,0,,,ACT-0062
+ACT-0064,INI-004,PER-015,Documentación técnica y funcional – motor de calidad de datos,Pendiente,Media,2026-12-03,2027-02-26,,0,,,ACT-0063
+ACT-0065,INI-004,PER-013,Gestión del cambio y adopción – motor de calidad de datos,Pendiente,Media,2026-12-21,2027-02-26,,0,,,ACT-0064
+ACT-0066,INI-004,PER-016,Cierre y transferencia a operaciones – motor de calidad de datos,Pendiente,Media,2027-01-07,2027-02-26,,0,,,ACT-0065
+ACT-0067,INI-005,PER-014,Relevamiento de casos de uso – modelo de forecast,Completado,Baja,2026-03-16,2026-06-08,,100,2026-06-09,,
+ACT-0068,INI-005,PER-020,Definición de alcance y criterios de éxito – modelo de forecast,Completado,Media,2026-04-02,2026-07-07,,100,2026-07-09,,ACT-0067
+ACT-0069,INI-005,PER-018,Análisis de calidad de datos – modelo de forecast,Completado,Baja,2026-04-20,2026-07-07,,100,2026-07-12,,ACT-0068
+ACT-0070,INI-005,PER-020,Preparación y curado de datos – modelo de forecast,Completado,Alta,2026-05-08,2026-07-07,,100,2026-07-11,,ACT-0069
+ACT-0071,INI-005,PER-018,Consolidación del histórico de ventas,Completado,Alta,2026-05-26,2026-08-14,,100,2026-08-15,,ACT-0070
+ACT-0072,INI-005,PER-014,Prototipo funcional – modelo de forecast,Completado,Media,2026-06-15,2026-08-14,,100,2026-08-14,,ACT-0071
+ACT-0073,INI-005,PER-012,Ingeniería de prompts y ajuste del modelo – modelo de forecast,Completado,Baja,2026-07-01,2026-09-04,,100,2026-09-07,,ACT-0072
+ACT-0074,INI-005,PER-018,Evaluación de calidad y sesgos – modelo de forecast,En Revisión,Alta,2026-07-20,2026-09-25,2026-11-01,91,2026-09-16,,ACT-0073
+ACT-0075,INI-005,PER-018,Publicación del forecast en el tablero comercial,En Revisión,Baja,2026-08-06,2026-10-06,,70,2026-10-03,,ACT-0074
+ACT-0076,INI-005,PER-014,Pruebas con usuarios clave – modelo de forecast,En Curso,Alta,2026-08-24,2026-11-13,,52,2026-10-06,,ACT-0075
+ACT-0077,INI-005,PER-020,Backtesting contra el pronóstico manual,En Curso,Media,2026-09-11,2026-11-30,,21,2026-09-28,,ACT-0076
+ACT-0078,INI-005,PER-020,Plan de capacitación – modelo de forecast,En Curso,Media,2026-09-29,2027-01-04,,1,2026-09-29,,ACT-0077
+ACT-0079,INI-005,PER-012,Despliegue en producción – modelo de forecast,Pendiente,Media,2026-10-19,2027-01-04,,0,,,ACT-0078
+ACT-0080,INI-005,PER-012,Documentación técnica y funcional – modelo de forecast,Pendiente,Media,2026-11-04,2027-01-26,,0,,,ACT-0079
+ACT-0081,INI-005,PER-012,Gestión del cambio y adopción – modelo de forecast,Pendiente,Media,2026-11-23,2027-01-29,,0,,,ACT-0080
+ACT-0082,INI-005,PER-014,Cierre y transferencia a operaciones – modelo de forecast,Pendiente,Alta,2026-12-10,2027-01-29,,0,,,ACT-0081
+ACT-0083,INI-006,PER-018,Relevamiento de casos de uso – procesador documental,Completado,Baja,2026-02-16,2026-04-16,,100,2026-04-17,,
+ACT-0084,INI-006,PER-014,Análisis de calidad de datos – procesador documental,Completado,Media,2026-03-05,2026-05-29,,100,2026-06-02,,ACT-0083
+ACT-0085,INI-006,PER-012,Diseño de arquitectura de la solución – procesador documental,Completado,Baja,2026-03-23,2026-06-26,,100,2026-07-01,,ACT-0084
+ACT-0086,INI-006,PER-016,Preparación y curado de datos – procesador documental,Completado,Alta,2026-04-10,2026-07-10,,100,2026-07-11,,ACT-0085
+ACT-0087,INI-006,PER-014,Prototipo funcional – procesador documental,Completado,Alta,2026-04-27,2026-07-17,,100,2026-07-22,,ACT-0086
+ACT-0088,INI-006,PER-016,Evaluación de calidad y sesgos – procesador documental,Completado,Media,2026-05-15,2026-07-17,,100,2026-07-20,,ACT-0087
+ACT-0089,INI-006,PER-018,Revisión de seguridad y privacidad – procesador documental,Completado,Media,2026-06-02,2026-07-24,,100,2026-07-28,,ACT-0088
+ACT-0090,INI-006,PER-014,Integración con el flujo de aprobación,En Revisión,Alta,2026-06-22,2026-09-21,,92,2026-09-27,,ACT-0089
+ACT-0091,INI-006,PER-018,Piloto con Cuentas por Pagar,En Revisión,Media,2026-07-07,2026-09-21,,88,2026-09-13,,ACT-0090
+ACT-0092,INI-006,PER-016,Despliegue en producción – procesador documental,En Revisión,Alta,2026-07-27,2026-09-21,,70,2026-10-07,,ACT-0091
+ACT-0093,INI-006,PER-018,Monitoreo y observabilidad – procesador documental,En Curso,Baja,2026-08-12,2026-10-30,,58,2026-09-07,,ACT-0092
+ACT-0094,INI-006,PER-014,Documentación técnica y funcional – procesador documental,En Curso,Media,2026-08-31,2026-10-30,,47,2026-10-09,,ACT-0093
+ACT-0095,INI-006,PER-016,Cierre y transferencia a operaciones – procesador documental,Bloqueado,Media,2026-09-16,2026-10-30,,12,2026-10-03,Pendiente de aprobación de seguridad,ACT-0094
+ACT-0096,INI-007,PER-016,Relevamiento de casos de uso – chat corporativo,Completado,Alta,2026-05-04,2026-07-31,,100,2026-08-04,,
+ACT-0097,INI-007,PER-016,Definición de alcance y criterios de éxito – chat corporativo,Completado,Media,2026-05-22,2026-07-31,,100,2026-08-01,,ACT-0096
+ACT-0098,INI-007,PER-019,Análisis de calidad de datos – chat corporativo,Completado,Alta,2026-06-09,2026-08-07,,100,2026-08-10,,ACT-0097
+ACT-0099,INI-007,PER-020,Diseño de arquitectura de la solución – chat corporativo,Completado,Media,2026-06-29,2026-09-08,,100,2026-09-12,,ACT-0098
+ACT-0100,INI-007,PER-021,Preparación y curado de datos – chat corporativo,En Revisión,Alta,2026-07-15,2026-09-22,,85,2026-10-09,,ACT-0099
+ACT-0101,INI-007,PER-016,Indexación de la base de conocimiento,En Revisión,Media,2026-08-03,2026-10-19,,77,2026-10-07,,ACT-0100
+ACT-0102,INI-007,PER-016,Prototipo funcional – chat corporativo,Bloqueado,Media,2026-08-20,2026-10-23,,62,,Capacidad de cómputo no disponible,ACT-0101
+ACT-0103,INI-007,PER-019,Ingeniería de prompts y ajuste del modelo – chat corporativo,En Curso,Media,2026-09-07,2026-11-09,,47,2026-09-28,,ACT-0102
+ACT-0104,INI-007,PER-019,Evaluación de calidad y sesgos – chat corporativo,En Curso,Alta,2026-09-25,2026-11-17,,25,2026-10-07,,ACT-0103
+ACT-0105,INI-007,PER-021,Integración con mensajería corporativa,Pendiente,Media,2026-10-13,2026-12-10,,0,,,ACT-0104
+ACT-0106,INI-007,PER-016,Pruebas con usuarios clave – chat corporativo,Pendiente,Baja,2026-11-02,2027-01-15,,0,,,ACT-0105
+ACT-0107,INI-007,PER-019,Piloto con áreas voluntarias,Pendiente,Baja,2026-11-18,2027-01-29,,0,,,ACT-0106
+ACT-0108,INI-007,PER-019,Plan de capacitación – chat corporativo,Pendiente,Alta,2026-12-07,2027-01-29,,0,,,ACT-0107
+ACT-0109,INI-007,PER-020,Despliegue en producción – chat corporativo,Pendiente,Alta,2026-12-24,2027-02-17,,0,,,ACT-0108
+ACT-0110,INI-007,PER-019,Monitoreo y observabilidad – chat corporativo,Pendiente,Media,2027-01-11,2027-04-02,,0,,,ACT-0109
+ACT-0111,INI-007,PER-016,Documentación técnica y funcional – chat corporativo,Pendiente,Baja,2027-01-29,2027-04-20,,0,,,ACT-0110
+ACT-0112,INI-007,PER-019,Gestión del cambio y adopción – chat corporativo,Pendiente,Alta,2027-02-16,2027-04-28,,0,,,ACT-0111
+ACT-0113,INI-007,PER-020,Cierre y transferencia a operaciones – chat corporativo,Pendiente,Alta,2027-03-08,2027-04-30,,0,,,ACT-0112
+ACT-0114,INI-008,PER-015,Relevamiento de casos de uso – modelo predictivo comercial,Completado,Alta,2026-01-19,2026-03-19,,100,2026-03-20,,
+ACT-0115,INI-008,PER-015,Definición de alcance y criterios de éxito – modelo predictivo comercial,Completado,Alta,2026-02-04,2026-04-16,,100,2026-04-18,,ACT-0114
+ACT-0116,INI-008,PER-019,Diseño de arquitectura de la solución – modelo predictivo comercial,Completado,Media,2026-02-23,2026-05-15,,100,2026-05-15,,ACT-0115
+ACT-0117,INI-008,PER-020,Preparación y curado de datos – modelo predictivo comercial,Completado,Media,2026-03-09,2026-06-08,,100,2026-06-09,,ACT-0116
+ACT-0118,INI-008,PER-015,Construcción del dataset de clientes,Completado,Media,2026-03-26,2026-06-08,,100,2026-06-11,,ACT-0117
+ACT-0119,INI-008,PER-013,Prototipo funcional – modelo predictivo comercial,Completado,Alta,2026-04-13,2026-06-26,,100,2026-06-27,,ACT-0118
+ACT-0120,INI-008,PER-015,Evaluación de calidad y sesgos – modelo predictivo comercial,Completado,Media,2026-04-28,2026-06-26,,100,2026-06-28,,ACT-0119
+ACT-0121,INI-008,PER-015,Revisión de seguridad y privacidad – modelo predictivo comercial,Completado,Baja,2026-05-15,2026-07-10,,100,2026-07-11,,ACT-0120
+ACT-0122,INI-008,PER-015,Integración con el CRM,En Curso,Media,2026-06-01,2026-08-18,,46,2026-10-06,,ACT-0121
+ACT-0123,INI-008,PER-019,Prueba A/B de campañas,En Curso,Media,2026-06-17,2026-09-17,,32,2026-09-26,,ACT-0122
+ACT-0124,INI-008,PER-013,Plan de capacitación – modelo predictivo comercial,En Curso,Media,2026-07-06,2026-10-02,,25,2026-10-07,,ACT-0123
+ACT-0125,INI-008,PER-019,Despliegue en producción – modelo predictivo comercial,En Curso,Media,2026-07-20,2026-10-06,,17,2026-10-07,,ACT-0124
+ACT-0126,INI-008,PER-020,Monitoreo y observabilidad – modelo predictivo comercial,En Curso,Baja,2026-08-06,2026-10-23,,9,2026-10-08,,ACT-0125
+ACT-0127,INI-008,PER-015,Gestión del cambio y adopción – modelo predictivo comercial,En Curso,Alta,2026-08-24,2026-10-23,,9,2026-09-30,,ACT-0126
+ACT-0128,INI-008,PER-020,Cierre y transferencia a operaciones – modelo predictivo comercial,En Curso,Alta,2026-09-08,2026-10-23,,9,2026-09-26,,ACT-0127
+ACT-0129,INI-009,PER-018,Relevamiento de casos de uso – clasificador de tickets,Completado,Media,2026-05-18,2026-07-16,,100,2026-07-21,,
+ACT-0130,INI-009,PER-018,Definición de alcance y criterios de éxito – clasificador de tickets,Completado,Media,2026-06-01,2026-07-17,,100,2026-07-18,,ACT-0129
+ACT-0131,INI-009,PER-019,Diseño de arquitectura de la solución – clasificador de tickets,Completado,Media,2026-06-16,2026-07-31,,100,2026-07-31,,ACT-0130
+ACT-0132,INI-009,PER-019,Preparación y curado de datos – clasificador de tickets,Completado,Baja,2026-06-30,2026-09-16,,100,2026-09-16,,ACT-0131
+ACT-0133,INI-009,PER-017,Etiquetado histórico de tickets,Completado,Media,2026-07-15,2026-10-02,,100,2026-10-04,,ACT-0132
+ACT-0134,INI-009,PER-017,Prototipo funcional – clasificador de tickets,Completado,Media,2026-07-29,2026-10-02,,100,2026-10-05,,ACT-0133
+ACT-0135,INI-009,PER-019,Evaluación de calidad y sesgos – clasificador de tickets,Completado,Alta,2026-08-13,2026-10-08,,100,2026-10-09,,ACT-0134
+ACT-0136,INI-009,PER-018,Revisión de seguridad y privacidad – clasificador de tickets,En Curso,Media,2026-08-27,2026-11-12,,43,2026-09-27,,ACT-0135
+ACT-0137,INI-009,PER-017,Integración con la mesa de ayuda,En Curso,Alta,2026-09-11,2026-11-26,,28,2026-10-07,,ACT-0136
+ACT-0138,INI-009,PER-018,Piloto en el turno de soporte,En Curso,Media,2026-09-25,2026-12-01,,6,2026-10-07,,ACT-0137
+ACT-0139,INI-009,PER-018,Plan de capacitación – clasificador de tickets,Pendiente,Media,2026-10-12,2026-12-30,,0,,,ACT-0138
+ACT-0140,INI-009,PER-017,Despliegue en producción – clasificador de tickets,Pendiente,Alta,2026-10-26,2026-12-30,,0,,,ACT-0139
+ACT-0141,INI-009,PER-018,Monitoreo y observabilidad – clasificador de tickets,Pendiente,Media,2026-11-09,2027-01-15,,0,,,ACT-0140
+ACT-0142,INI-009,PER-018,Gestión del cambio y adopción – clasificador de tickets,Pendiente,Media,2026-11-23,2027-01-15,,0,,,ACT-0141
+ACT-0143,INI-009,PER-018,Cierre y transferencia a operaciones – clasificador de tickets,Pendiente,Alta,2026-12-07,2027-01-15,,0,,,ACT-0142
+ACT-0144,INI-010,PER-014,Relevamiento de casos de uso – generador de reportes Power BI,Completado,Alta,2026-06-01,2026-07-24,,100,2026-07-28,,
+ACT-0145,INI-010,PER-014,Análisis de calidad de datos – generador de reportes Power BI,Completado,Media,2026-06-15,2026-08-17,,100,2026-08-18,,ACT-0144
+ACT-0146,INI-010,PER-018,Diseño de arquitectura de la solución – generador de reportes Power BI,Completado,Media,2026-06-29,2026-08-19,,100,2026-08-21,,ACT-0145
+ACT-0147,INI-010,PER-018,Relevamiento de modelos existentes,Completado,Alta,2026-07-14,2026-08-24,,100,2026-08-24,,ACT-0146
+ACT-0148,INI-010,PER-019,Ingeniería de prompts y ajuste del modelo – generador de reportes Power BI,Bloqueado,Media,2026-07-28,2026-09-11,,73,2026-10-08,Falta de acceso a datos productivos,ACT-0147
+ACT-0149,INI-010,PER-019,Evaluación de calidad y sesgos – generador de reportes Power BI,En Curso,Alta,2026-08-12,2026-09-25,,61,2026-10-09,,ACT-0148
+ACT-0150,INI-010,PER-014,Generación asistida de medidas DAX,En Curso,Baja,2026-08-26,2026-11-05,,56,2026-09-16,,ACT-0149
+ACT-0151,INI-010,PER-015,Pruebas con usuarios clave – generador de reportes Power BI,En Curso,Media,2026-09-10,2026-11-05,,41,,,ACT-0150
+ACT-0152,INI-010,PER-019,Plan de capacitación – generador de reportes Power BI,En Curso,Alta,2026-09-24,2026-11-06,,26,2026-10-07,,ACT-0151
+ACT-0153,INI-010,PER-015,Monitoreo y observabilidad – generador de reportes Power BI,Bloqueado,Baja,2026-10-09,2026-12-11,,1,2026-10-09,Falta de acceso a datos productivos,ACT-0152
+ACT-0154,INI-010,PER-015,Documentación técnica y funcional – generador de reportes Power BI,Pendiente,Media,2026-10-23,2026-12-11,,0,,,ACT-0153
+ACT-0155,INI-010,PER-014,Cierre y transferencia a operaciones – generador de reportes Power BI,Pendiente,Alta,2026-11-09,2026-12-11,,0,,,ACT-0154
+ACT-0156,INI-011,PER-013,Relevamiento de casos de uso – agente de conciliación,En Revisión,Media,2026-08-03,2026-10-23,,75,2026-10-04,,
+ACT-0157,INI-011,PER-014,Definición de alcance y criterios de éxito – agente de conciliación,En Curso,Baja,2026-08-20,2026-10-30,,65,2026-10-03,,ACT-0156
+ACT-0158,INI-011,PER-015,Diseño de arquitectura de la solución – agente de conciliación,En Curso,Media,2026-09-07,2026-11-17,,36,2026-10-07,,ACT-0157
+ACT-0159,INI-011,PER-018,Preparación y curado de datos – agente de conciliación,En Curso,Alta,2026-09-25,2026-11-26,,8,2026-10-03,,ACT-0158
+ACT-0160,INI-011,PER-018,Extracción de movimientos bancarios,Pendiente,Media,2026-10-13,2026-12-03,,0,,,ACT-0159
+ACT-0161,INI-011,PER-013,Prototipo funcional – agente de conciliación,Pendiente,Media,2026-11-02,2027-01-14,,0,,,ACT-0160
+ACT-0162,INI-011,PER-018,Evaluación de calidad y sesgos – agente de conciliación,Pendiente,Baja,2026-11-18,2027-02-12,,0,,,ACT-0161
+ACT-0163,INI-011,PER-015,Revisión de seguridad y privacidad – agente de conciliación,Pendiente,Media,2026-12-07,2027-02-12,,0,,,ACT-0162
+ACT-0164,INI-011,PER-013,Integración con el libro contable,Pendiente,Media,2026-12-24,2027-03-17,,0,,,ACT-0163
+ACT-0165,INI-011,PER-014,Piloto con Tesorería,Pendiente,Media,2027-01-11,2027-03-17,,0,,,ACT-0164
+ACT-0166,INI-011,PER-015,Plan de capacitación – agente de conciliación,Pendiente,Alta,2027-01-28,2027-04-16,,0,,,ACT-0165
+ACT-0167,INI-011,PER-014,Despliegue en producción – agente de conciliación,Pendiente,Media,2027-02-15,2027-04-16,,0,,,ACT-0166
+ACT-0168,INI-011,PER-015,Monitoreo y observabilidad – agente de conciliación,Pendiente,Media,2027-03-05,2027-05-13,,0,,,ACT-0167
+ACT-0169,INI-011,PER-015,Gestión del cambio y adopción – agente de conciliación,Pendiente,Baja,2027-03-23,2027-05-14,,0,,,ACT-0168
+ACT-0170,INI-011,PER-015,Cierre y transferencia a operaciones – agente de conciliación,Pendiente,Baja,2027-04-12,2027-05-28,,0,,,ACT-0169

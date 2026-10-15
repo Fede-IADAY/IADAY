@@ -1,0 +1,5 @@
+expression RutaOrigen = "C:\RUTA_LOCAL\IADAY\OrigenDatos" meta [IsParameterQuery = true, IsParameterQueryRequired = true, Type = "Text"]
+	lineageTag: 2b35ca6e-b347-5e23-bd75-974b46a4cfd9
+
+	annotation PBI_ResultType = Text
+

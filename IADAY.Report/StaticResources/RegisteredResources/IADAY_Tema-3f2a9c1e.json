@@ -1,0 +1,56 @@
+{
+  "name": "IADAY_Tema-3f2a9c1e.json",
+  "dataColors": [
+    "#1B3A5C",
+    "#E8A020",
+    "#1E9E5A",
+    "#F5B800",
+    "#D64545",
+    "#4F7CAC",
+    "#7A8699",
+    "#0D1B2A"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#1A1A2E",
+  "tableAccent": "#1B3A5C",
+  "good": "#1E9E5A",
+  "neutral": "#F5B800",
+  "bad": "#D64545",
+  "maximum": "#1B3A5C",
+  "center": "#F5B800",
+  "minimum": "#D64545",
+  "null": "#7A8699",
+  "textClasses": {
+    "callout": {
+      "fontSize": 22,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#1B3A5C"
+    },
+    "title": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#1B3A5C"
+    },
+    "header": {
+      "fontSize": 11,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#1B3A5C"
+    },
+    "label": {
+      "fontSize": 10,
+      "fontFace": "Segoe UI",
+      "color": "#5B6678"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ]
+      }
+    }
+  }
+}

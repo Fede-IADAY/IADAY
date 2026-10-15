@@ -1,0 +1,88 @@
+table fact_solicitudes
+	lineageTag: e03b069b-0414-5a38-8f40-5013af39eb5f
+
+	column id_solicitud
+		dataType: string
+		lineageTag: 3e6f632c-97aa-5173-a10d-d3a4dbe35529
+		summarizeBy: none
+		sourceColumn: id_solicitud
+
+	column id_proyecto
+		dataType: string
+		isHidden
+		lineageTag: 62d67ef1-e732-5304-95d9-edfeb638037c
+		summarizeBy: none
+		sourceColumn: id_proyecto
+
+	column tipo
+		dataType: string
+		lineageTag: af011f15-1c22-52c2-a89b-0593ff426cb0
+		summarizeBy: none
+		sourceColumn: tipo
+
+	column id_firmante
+		dataType: string
+		isHidden
+		lineageTag: 31e2b784-3b13-53d3-a240-00252cfde32a
+		summarizeBy: none
+		sourceColumn: id_firmante
+
+	column fecha_creacion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 82400c7f-49fc-5b3e-ae98-ddc1b023e807
+		summarizeBy: none
+		sourceColumn: fecha_creacion
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column fecha_resolucion
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9376e11d-770e-5a65-8777-6f35bd38bb77
+		summarizeBy: none
+		sourceColumn: fecha_resolucion
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column estado
+		dataType: string
+		lineageTag: d1a937f7-d4c1-5e8b-8e8a-75967fa4263f
+		summarizeBy: none
+		sourceColumn: estado
+
+	column 'Días de Firma' =
+			IF ( ISBLANK ( fact_solicitudes[fecha_resolucion] ),
+			     INT ( [Fecha Corte] - fact_solicitudes[fecha_creacion] ),
+			     INT ( fact_solicitudes[fecha_resolucion] - fact_solicitudes[fecha_creacion] ) )
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ddfc1e3-c92f-5bde-bbc3-5a402deb6889
+		summarizeBy: none
+
+	column 'Semáforo Firma' =
+			SWITCH ( TRUE (),
+			    fact_solicitudes[Días de Firma] <= 15, "Verde",
+			    fact_solicitudes[Días de Firma] <= 30, "Amarillo",
+			    "Rojo" )
+		dataType: string
+		lineageTag: 56c64115-8860-5034-b287-003cf10558b0
+		summarizeBy: none
+
+	column 'Color Semáforo Firma' = SWITCH ( fact_solicitudes[Semáforo Firma], "Verde", "#1E9E5A", "Amarillo", "#F5B800", "#D64545" )
+		dataType: string
+		lineageTag: b5e05ff8-b786-501e-9820-0e49590b6dbd
+		summarizeBy: none
+
+	partition fact_solicitudes = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaOrigen & "\fact_solicitudes.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"id_solicitud", type text}, {"id_proyecto", type text}, {"tipo", type text}, {"id_firmante", type text}, {"fecha_creacion", type date}, {"fecha_resolucion", type date}, {"estado", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

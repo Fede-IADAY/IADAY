@@ -1,0 +1,12 @@
+id_proyecto,nombre,descripcion,area,tipo_ia,fase,id_sponsor,id_lider,id_coordinador_portafolio,fecha_inicio,fecha_fin,presupuesto_aprobado_usd
+INI-001,Asistente IA RRHH,"Asistente conversacional que resuelve consultas de beneficios, licencias y políticas internas.",Personas,Generativa,Despliegue,PER-001,PER-006,PER-004,2026-03-02,2026-12-18,418730
+INI-002,Copilot Corporativo,"Copiloto para redacción, resumen y búsqueda sobre documentos y correos de la compañía.",Tecnología,Generativa,Desarrollo,PER-002,PER-007,PER-004,2026-02-02,2027-03-31,1847250
+INI-003,Automatización de Reportes,Generación automática de reportes de gestión mensuales con narrativa explicada por IA.,Finanzas,Automatización,Despliegue,PER-001,PER-008,PER-004,2026-01-12,2026-11-27,263480
+INI-004,Data Quality IA,Detección automática de anomalías y duplicados en los datos maestros mediante modelos de IA.,Datos,Predictiva,Desarrollo,PER-002,PER-009,PER-005,2026-04-06,2027-02-26,684920
+INI-005,Forecast Inteligente,Pronóstico de demanda y ventas con modelos de series temporales y variables externas.,Comercial,Predictiva,Desarrollo,PER-003,PER-010,PER-005,2026-03-16,2027-01-29,539610
+INI-006,Procesamiento Documental,"Extracción y clasificación automática de datos desde facturas, contratos y formularios.",Operaciones,Generativa,Despliegue,PER-003,PER-011,PER-005,2026-02-16,2026-10-30,391870
+INI-007,Chat Corporativo IA,"Canal de chat interno con IA para consultas de soporte, procesos y normativas.",Tecnología,Generativa,Piloto,PER-002,PER-007,PER-004,2026-05-04,2027-04-30,1203460
+INI-008,Analítica Predictiva,Modelos predictivos de abandono y propensión de compra para campañas comerciales.,Comercial,Predictiva,Desarrollo,PER-003,PER-010,PER-005,2026-01-19,2026-10-23,452190
+INI-009,Clasificación Inteligente de Tickets,Clasificación y ruteo automático de tickets de soporte según tema y urgencia.,Operaciones,Predictiva,Desarrollo,PER-003,PER-011,PER-005,2026-05-18,2027-01-15,308740
+INI-010,Automatización Power BI,Generación y documentación asistida por IA de modelos y reportes de Power BI.,Finanzas,Automatización,Despliegue,PER-001,PER-008,PER-004,2026-06-01,2026-12-11,124380
+INI-011,Agente de Conciliación Financiera,Agente que concilia movimientos bancarios y contables y propone ajustes para su aprobación.,Finanzas,Generativa,Piloto,PER-001,PER-006,PER-004,2026-08-03,2027-05-28,957310
